@@ -43,6 +43,7 @@ public class ListOfLinks<E> {
     }
 
     private ListNode<E> getNode(int index) throws IndexOutOfBoundsException {   //Gets a node at an index
+
         if(index > this.size() - 1 || index < 0) throw new IndexOutOfBoundsException("Index " + index + " out of bounds for list of size " + size());
 
         int counter = 0;
@@ -82,8 +83,21 @@ public class ListOfLinks<E> {
         return get(size() - 1);
     }
 
+    public E pop(){     //Slow and bad, you should use a doubly linked list :)
+        E data = getLast();
+        removeLast();
+        return data;
+    }
+    //TODO: We fixed this method! Maybe test and fix the rest if you want practice, and notice which ones are O(1), O(N), etc.
     public void removeLast() {
-        this.getNode(size() - 2).setNext(null);
+        if(this.size == 0){
+            return;
+        }
+        if(this.size == 1){
+            this.head = null;
+        }else {
+            this.getNode(size() - 2).setNext(null);
+        }
         size--;
     }
 
